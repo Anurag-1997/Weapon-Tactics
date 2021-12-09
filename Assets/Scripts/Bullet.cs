@@ -29,4 +29,16 @@ public class Bullet : MonoBehaviour
         // rigidBody.AddForce(direction * acceleration,ForceMode2D.Impulse)
         dir = transform.position + (direction.normalized * 10f);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag=="wall")
+        {
+            Destroy(this.gameObject);
+        }
+        if(collision.gameObject.tag=="enemy")
+        {
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
+        }
+    }
 }
