@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb2d;
     private Vector2 moveDirection;
     public GameObject bullet;
+    public Transform firepoint;
     private Animator myAnim;
 
     private void Start()
@@ -39,9 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject tempBullet = Instantiate(bullet, transform.position+(dir.normalized), Quaternion.identity);
-            tempBullet.GetComponent<Bullet>().Fire(dir);
-
+            GameObject tempBullet = Instantiate(bullet, firepoint.position + 1.0f * transform.forward, transform.rotation); // transform.position+(dir.normalized)
+          
         }
         ProcessInputs();
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 10f;
     private Vector2 dir;
     private Rigidbody2D rigidBody;
     void Start()
@@ -17,18 +17,24 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, dir, speed * Time.deltaTime);
-        if((Vector2) transform.position==dir)
+        //transform.position = Vector2.MoveTowards(transform.position, dir, speed * Time.deltaTime);
+        
+        if ((Vector2) transform.position==dir)
         {
             Destroy(gameObject);
         }
 
     }
-    public void Fire(Vector3 direction)
+    void FixedUpdate()
     {
-        // rigidBody.AddForce(direction * acceleration,ForceMode2D.Impulse)
-        dir = transform.position + (direction.normalized * 10f);
+        rigidBody.AddForce(transform.up * speed);
+        
     }
+    //public void Fire(Vector3 direction)
+    //{
+    //    //dir = transform.position + direction.normalized *speed;
+        
+    //}
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag=="wall")
